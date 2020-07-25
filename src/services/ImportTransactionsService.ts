@@ -17,6 +17,7 @@ class ImportTransactionsService {
     if (!(await fs.promises.stat(filePath))) {
       throw new AppError('File not found');
     }
+
     const parsedTransactions = await csvToJson({ checkType: true }).fromFile(
       filePath,
     );
@@ -31,7 +32,6 @@ class ImportTransactionsService {
     }
 
     await fs.promises.unlink(filePath);
-
     return parsedTransactions;
   }
 }
